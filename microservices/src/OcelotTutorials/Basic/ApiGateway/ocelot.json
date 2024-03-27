@@ -10,7 +10,11 @@
         }
       ],
       "UpstreamPathTemplate": "/accounting",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     
     {
@@ -23,7 +27,11 @@
         }
       ],
       "UpstreamPathTemplate": "/inventory",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }    
   ],
   "GlobalConfiguration": {
