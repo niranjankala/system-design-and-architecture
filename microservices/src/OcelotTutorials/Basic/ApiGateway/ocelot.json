@@ -16,7 +16,7 @@
         "AllowedScopes": []
       }
     },
-    
+
     {
       "DownstreamPathTemplate": "/api/values",
       "DownstreamScheme": "http",

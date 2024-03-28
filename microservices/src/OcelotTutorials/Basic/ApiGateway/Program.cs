@@ -24,9 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
+app.UseAuthentication(); // Place UseAuthentication before UseOcelot
+app.UseAuthorization(); // Place UseAuthorization before UseAuthentication
 app.MapControllers();
-
 app.UseOcelot().Wait();
-app.UseAuthentication();
 app.Run();
