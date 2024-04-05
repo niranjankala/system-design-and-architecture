@@ -1,0 +1,6 @@
+@PolyTutorials.PolyHttpApi_HostAddress = http://localhost:5150
+
+GET {{PolyTutorials.PolyHttpApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
