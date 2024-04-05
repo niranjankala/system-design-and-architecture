@@ -55,7 +55,7 @@ namespace PolyTutorials.App
                     Console.WriteLine($"Retrying after {timespan.TotalSeconds} seconds due to {exception.Message}");
                 });
 
-            myPolicy.Execute(() => SimulateOperation());
+            policy.Execute(() => SimulateOperation());
 
             Console.ReadLine(); 
         }
