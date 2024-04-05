@@ -39,9 +39,22 @@ namespace PolyTutorials.App
 
             //Fallback
 
-            var myPolicy = Policy
-                                .Handle<Exception>()
-                                .Fallback(() => SimulateOperationRedundant());
+            //var myPolicy = Policy
+            //                    .Handle<Exception>()
+            //                    .Fallback(() => SimulateOperationRedundant());
+            //myPolicy.Execute(() => SimulateOperation());
+
+
+            //Exponential back off
+            var policy = Policy
+                .Handle<Exception>()
+                .WaitAndRetry(5, x => TimeSpan.FromSeconds(
+                    Math.Pow(2, x))
+                , onRetry: (exception, timespan, context) =>
+                {
+                    Console.WriteLine($"Retrying after {timespan.TotalSeconds} seconds due to {exception.Message}");
+                });
+
             myPolicy.Execute(() => SimulateOperation());
 
             Console.ReadLine(); 
