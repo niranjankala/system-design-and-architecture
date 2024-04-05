@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Polly;
+
 namespace PolyTutorials.App
 {
     internal class Program
@@ -7,7 +9,12 @@ namespace PolyTutorials.App
         static int counter = 0;
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var myPolicy = Policy
+                                .Handle<Exception>()
+                                .WaitAndRetry(5, x => TimeSpan.FromSeconds(5));
+            myPolicy.Execute(() => SimulateOperation());
+                
+        Console.ReadLine(); 
         }
         static void SimulateOperation()
         {
