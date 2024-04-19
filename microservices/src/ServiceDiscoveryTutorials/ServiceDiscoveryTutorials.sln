@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34707.107
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDiscoveryTutorials.CatalogApi", "ServiceDiscoveryTutorials.CatalogApi\ServiceDiscoveryTutorials.CatalogApi.csproj", "{FF83B889-6EF3-4D8D-9804-9305CE26231C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDiscoveryTutorials.ClientApp", "ServiceDiscoveryTutorials.ClientApp\ServiceDiscoveryTutorials.ClientApp.csproj", "{D454D320-467E-4296-A66E-E94F2EFC4520}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FF83B889-6EF3-4D8D-9804-9305CE26231C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF83B889-6EF3-4D8D-9804-9305CE26231C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF83B889-6EF3-4D8D-9804-9305CE26231C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D454D320-467E-4296-A66E-E94F2EFC4520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D454D320-467E-4296-A66E-E94F2EFC4520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D454D320-467E-4296-A66E-E94F2EFC4520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D454D320-467E-4296-A66E-E94F2EFC4520}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
