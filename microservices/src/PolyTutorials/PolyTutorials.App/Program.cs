@@ -10,10 +10,10 @@ namespace PolyTutorials.App
         static void Main(string[] args)
         {
             //Retry
-            //var myPolicy = Policy
+            //var retryPolicy = Policy
             //                    .Handle<Exception>()
             //                    .WaitAndRetry(5, x => TimeSpan.FromSeconds(5));
-            //myPolicy.Execute(() => SimulateOperation());
+            //retryPolicy.Execute(() => SimulateOperation());
 
 
             //Circuit Breaker
