@@ -28,5 +28,11 @@ namespace ServiceDiscoveryTutorials.CatalogApi
         {
             await _consulClient.Agent.ServiceDeregister(serviceId);
         }
+
+        public async Task RegisterServiceAsync(AgentServiceRegistration registration)
+        {
+            await _consulClient.Agent.ServiceDeregister(registration.ID);
+            await _consulClient.Agent.ServiceRegister(registration);
+        }
     }
 }

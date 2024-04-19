@@ -47,18 +47,30 @@ namespace ServiceDiscoveryTutorials.CatalogApi
             var serviceName = "CatalogApi";
             var serviceId = Guid.NewGuid().ToString();
             var serviceAddress = "localhost";
-            var servicePort = 9002;
+            var servicePort = 7269;
 
             lifetime.ApplicationStarted.Register(async () =>
             {
-                await discovery.RegisterServiceAsync(serviceName, serviceId, serviceAddress, servicePort);
+                var registration = new AgentServiceRegistration
+                {
+                    ID = serviceId,
+                    Name = serviceName,
+                    Address = serviceAddress,
+                    Port = servicePort,
+                    Check = new AgentServiceCheck
+                    {
+                        HTTP = $"https://{serviceAddress}:{servicePort}/Health",
+                        Interval = TimeSpan.FromSeconds(10),
+                        Timeout = TimeSpan.FromSeconds(5)
+                    }
+                };
+                await discovery.RegisterServiceAsync(registration);
             });
 
             lifetime.ApplicationStopping.Register(async () =>
             {
                 await discovery.DeRegisterServiceAsync(serviceId);
             });
-
 
             app.Run();
         }
