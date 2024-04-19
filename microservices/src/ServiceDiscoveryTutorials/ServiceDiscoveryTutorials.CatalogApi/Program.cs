@@ -14,7 +14,9 @@ namespace ServiceDiscoveryTutorials.CatalogApi
 
             builder.Services.AddSingleton<IConsulClient>(p => new ConsulClient(consulConfig =>
             {
-                consulConfig.Address = new Uri("http://localhost:8500");
+                var consulHost = builder.Configuration["Consul:Host"];
+                var consulPort = Convert.ToInt32(builder.Configuration["Consul:Port"]);
+                consulConfig.Address = new Uri($"http://{consulHost}:{consulPort}");
             }));
 
             builder.Services.AddSingleton<IServiceDiscovery, ConsulServiceDiscovery>();
@@ -45,7 +47,7 @@ namespace ServiceDiscoveryTutorials.CatalogApi
             var serviceName = "CatalogApi";
             var serviceId = Guid.NewGuid().ToString();
             var serviceAddress = "localhost";
-            var servicePort = 5000;
+            var servicePort = 9002;
 
             lifetime.ApplicationStarted.Register(async () =>
             {
