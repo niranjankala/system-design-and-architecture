@@ -15,9 +15,9 @@ namespace CQRSBasics.App
         static public IKernel kernel = new StandardKernel(); // ninject
         static void Main(string[] args)
         {
-            kernel.Load(Assembly.GetExecutingAssembly()); // lookups
-
-
+            //kernel.Load(Assembly.GetExecutingAssembly()); // lookups
+            kernel.Load(new Binding());
+            
             CreateCustomer newCustomer = new CreateCustomer()
             {
                 Name = "Niranjan"
@@ -30,11 +30,13 @@ namespace CQRSBasics.App
 
         public class Binding : NinjectModule
         {
+
             public override void Load()
             {
                 //command
                 Bind(typeof(ICommandHandler<CreateCustomer>)).
                    To(typeof(CreateCustomerHandler));
+
                 //query
 
                 //events
