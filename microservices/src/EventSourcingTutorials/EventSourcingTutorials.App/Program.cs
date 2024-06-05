@@ -1,6 +1,7 @@
 ﻿using EventSourcingTutorials.App.Commands;
+using EventSourcingTutorials.App.Commands.Handlers;
 using EventSourcingTutorials.App.Dispatchers;
-using EventSourcingTutorials.App.Handlers;
+using EventSourcingTutorials.App.Events;
 using EventSourcingTutorials.App.Interfaces;
 using Ninject;
 using Ninject.Modules;
@@ -16,14 +17,20 @@ namespace EventSourcingTutorials.App
         {
             //kernel.Load(Assembly.GetExecutingAssembly()); // lookups
             kernel.Load(new Binding());
-            
+
+            IDispatcher dispatcher = new CustomerDispatcher();
+
             CreateCustomer newCustomer = new CreateCustomer()
             {
                 Name = "Niranjan"
             };
-
-            IDispatcher dispatcher = new CustomerDispatcher();
             dispatcher.Send<CreateCustomer>(newCustomer);
+
+            CreateCustomer newCustomer1 = new CreateCustomer()
+            {
+                Name = "Dhruv"
+            };
+            dispatcher.Send<CreateCustomer>(newCustomer1);
 
         }
 
@@ -39,6 +46,8 @@ namespace EventSourcingTutorials.App
                 //query
 
                 //events
+                Bind(typeof(IEventHandler<CustomerCreated>)).
+                  To(typeof(CustomerCreated));
 
             }
         }

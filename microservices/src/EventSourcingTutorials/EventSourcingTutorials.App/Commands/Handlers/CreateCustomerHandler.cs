@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventSourcingTutorials.App.Handlers
+namespace EventSourcingTutorials.App.Commands.Handlers
 {
     internal class CreateCustomerHandler : ICommandHandler<CreateCustomer>
     {
