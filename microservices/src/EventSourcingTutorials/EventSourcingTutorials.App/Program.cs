@@ -1,0 +1,48 @@
+﻿using EventSourcingTutorials.App.Commands;
+using EventSourcingTutorials.App.Dispatchers;
+using EventSourcingTutorials.App.Handlers;
+using EventSourcingTutorials.App.Interfaces;
+using Ninject;
+using Ninject.Modules;
+using System;
+using System.Reflection;
+
+namespace EventSourcingTutorials.App
+{
+    internal class Program
+    {
+        static public IKernel kernel = new StandardKernel(); // ninject
+        static void Main(string[] args)
+        {
+            //kernel.Load(Assembly.GetExecutingAssembly()); // lookups
+            kernel.Load(new Binding());
+            
+            CreateCustomer newCustomer = new CreateCustomer()
+            {
+                Name = "Niranjan"
+            };
+
+            IDispatcher dispatcher = new CustomerDispatcher();
+            dispatcher.Send<CreateCustomer>(newCustomer);
+
+        }
+
+        public class Binding : NinjectModule
+        {
+
+            public override void Load()
+            {
+                //command
+                Bind(typeof(ICommandHandler<CreateCustomer>)).
+                   To(typeof(CreateCustomerHandler));
+
+                //query
+
+                //events
+
+            }
+        }
+    }
+
+
+}
