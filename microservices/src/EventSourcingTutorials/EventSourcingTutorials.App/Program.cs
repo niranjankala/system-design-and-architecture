@@ -1,8 +1,10 @@
-﻿using EventSourcingTutorials.App.Commands;
+﻿using AutoMapper;
+using EventSourcingTutorials.App.Commands;
 using EventSourcingTutorials.App.Commands.Handlers;
 using EventSourcingTutorials.App.Dispatchers;
 using EventSourcingTutorials.App.Events;
 using EventSourcingTutorials.App.Interfaces;
+using EventSourcingTutorials.App.Models;
 using Ninject;
 using Ninject.Modules;
 using System;
@@ -13,8 +15,15 @@ namespace EventSourcingTutorials.App
     internal class Program
     {
         static public IKernel kernel = new StandardKernel(); // ninject
+        static public MapperConfiguration mappconfig = null;
         static void Main(string[] args)
         {
+            mappconfig = new MapperConfiguration
+                        (c => c.CreateMap<Customer, CreateCustomer>());
+            mappconfig = new MapperConfiguration
+                       (c => c.CreateMap<CreateCustomer, CustomerCreated>());
+
+
             //kernel.Load(Assembly.GetExecutingAssembly()); // lookups
             kernel.Load(new Binding());
 
@@ -22,13 +31,13 @@ namespace EventSourcingTutorials.App
 
             CreateCustomer newCustomer = new CreateCustomer()
             {
-                Name = "Niranjan"
+                name = "Niranjan"
             };
             dispatcher.Send<CreateCustomer>(newCustomer);
 
             CreateCustomer newCustomer1 = new CreateCustomer()
             {
-                Name = "Dhruv"
+                name = "Dhruv"
             };
             dispatcher.Send<CreateCustomer>(newCustomer1);
 

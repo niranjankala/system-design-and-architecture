@@ -1,9 +1,5 @@
-﻿using EventSourcingTutorials.App.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EasyNetQ;
+using EventSourcingTutorials.App.Interfaces;
 
 namespace EventSourcingTutorials.App.Events.Handlers
 {
@@ -11,7 +7,9 @@ namespace EventSourcingTutorials.App.Events.Handlers
     {
 
         public void Handle(CustomerCreated event1)
-        {            
+        {
+            var bus = RabbitHutch.CreateBus("host=localhost");
+            bus.PubSub.Publish<CustomerCreated>(event1);
             System.Console.WriteLine($"User was created {event1.Guid} - event");
         }
     }
